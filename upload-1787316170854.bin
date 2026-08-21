@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Cara Cepat Kaya </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+      transition: background 0.1s;
+    }
+
+    #prankBtn {
+      padding: 30px 60px;
+      font-size: 24px;
+      background-color: cyan;
+      color: black;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    #exitMsg {
+      display: none;
+      font-size: 24px;
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+      animation: blink 0.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="prankBtn">TEKAN AKU</button>
+  <div id="exitMsg">JIKA INGIN KELUAR, NAIKAN VOLUME HP ANDA</div>
+  <audio id="prankAudio" src="suara.mp3" loop></audio>
+
+  <script>
+    const button = document.getElementById("prankBtn");
+    const audio = document.getElementById("prankAudio");
+    const exitMsg = document.getElementById("exitMsg");
+
+    button.addEventListener("click", async () => {
+      // Fullscreen mode
+      if (document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen();
+      }
+
+      // Mainkan musik
+      audio.volume = 1.0;
+      audio.play();
+
+      // Getar super cepat dan loop
+      const startVibration = () => {
+        navigator.vibrate([100, 50, 100, 50, 100, 50, 100, 50, 100]);
+        setTimeout(startVibration, 800); // Loop
+      };
+      if (navigator.vibrate) {
+        startVibration();
+      }
+
+      // Layar berkedip terus
+      const flash = () => {
+        document.body.style.background =
+          document.body.style.background === "black" ? "white" : "black";
+        setTimeout(flash, 100);
+      };
+      flash();
+
+      // Tampilkan pesan dan sembunyikan tombol
+      button.style.display = "none";
+      exitMsg.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
