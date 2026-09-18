@@ -1,0 +1,5 @@
+=> conn.relayMessage(m.chat, {
+  contactMessage: {
+    vcard: "BEGIN:VCARD\nVERSION:3.0\nFN:Nixx\nTEL;type=CELL;type=VOICE;waid=6281410502451:+6281410502451\nEND:VCARD"
+  }
+})
